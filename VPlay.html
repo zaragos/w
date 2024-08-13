@@ -64,7 +64,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.9); /* Darker overlay */
+            background: rgba(0, 0, 0, 0.9);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -146,8 +146,8 @@
             top: 20px;
             right: 20px;
             z-index: 1000;
-            width: 50px; /* Increased size */
-            height: 50px; /* Increased size */
+            width: 50px;
+            height: 50px;
             cursor: pointer;
         }
         .center-play-button {
@@ -249,7 +249,9 @@
                     'showinfo': 0,
                     'rel': 0,
                     'iv_load_policy': 3,
-                    'fs': 0
+                    'fs': 0,
+                    'modestbranding': 1,
+                    'disablekb': 1
                 }
             });
         }
@@ -278,7 +280,6 @@
             centerPlayButton.style.display = 'flex';
 
             updateProgressBar();
-            injectCustomStyles();
         }
 
         function onPlayerStateChange(event) {
@@ -355,38 +356,6 @@
                 topOverlay.style.transform = 'translateY(-100%)';
                 bottomOverlay.style.transform = 'translateY(100%)';
             }, baseOverlayDelay * 1.5);
-        }
-
-        function injectCustomStyles() {
-            const playerFrame = document.getElementById('youtube-player');
-            const playerDoc = playerFrame.contentWindow.document;
-            const customStyles = `
-                .ytp-chrome-top,
-                .ytp-show-cards-title,
-                .ytp-expand, 
-                .ytp-pause-overlay, 
-                .ytp-contextmenu,
-                .ytp-impression-link,
-                .ytp-settings-button.ytp-hd-quality-badge,
-                .ytp-settings-button,
-                .ytp-subtitles-button,
-                .ytp-button.ytp-youtube-button,
-                .ytp-big-mode.ytp-embed,
-                button.ytp-button.ytp-settings-button,
-                .ytp-embed .ytp-player-content,
-                .ytp-gradient-top,
-                .ytp-gradient-bottom,
-                .ytp-chrome-bottom,
-                .ytp-endscreen-content { 
-                    display: none !important; 
-                }
-                .html5-video-player {
-                    background-color: transparent !important;
-                }
-            `;
-            const styleElement = document.createElement('style');
-            styleElement.textContent = customStyles;
-            playerDoc.head.appendChild(styleElement);
         }
 
         // Show overlays on page load
